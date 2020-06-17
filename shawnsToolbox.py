@@ -37,7 +37,7 @@ def clean(sheep):
     sheep['sum0_1'] = sheep['sum0_1']*6.4/9.81
     return sheep
 
-def show(sheep):
+def show(sheep,sheepnr):
     #fig = px.line()
     fig = go.Figure()
     fig.add_scatter(x=sheep.index, y=sheep['sum0'], name='Summe0 rechts')
@@ -48,7 +48,7 @@ def show(sheep):
     fig.add_scatter(x=sheep.index, y=sheep['sum1_1'], name='links (innen)?')
     
     fig.update_layout(
-    title=("Belastung der Hinterläufe"),
+    title=("Belastung der Hinterläufe bei "+sheepnr),
     xaxis_title="Zeit (ms)",
     yaxis_title="Gewicht (kg)",
     font=dict(
