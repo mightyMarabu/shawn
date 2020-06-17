@@ -1,5 +1,7 @@
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+
 
 def prepare(sheepnr):
     s0 = pd.read_csv("sheeps/"+sheepnr+"Sensor0.csv", sep=";", decimal=",")
@@ -18,16 +20,6 @@ def prepare(sheepnr):
 # create new Dataframe with just two columns and one index
     s = pd.concat([s0['sum0'],s0['sum0_0'],s0['sum0_1'], s1['sum1'],s1['sum1_0'],s1['sum1_1']], axis=1, keys=['sum0','sum0_0','sum0_1', 'sum1','sum1_0','sum1_1'])
     return s
-
-def show(sheep):
-    fig = px.line()
-    fig.add_scatter(x=sheep.index, y=sheep['sum0'], name='Summe0 rechts')
-    fig.add_scatter(x=sheep.index, y=sheep['sum1'], name='Summe1 links')
-    fig.add_scatter(x=sheep.index, y=sheep['sum0_0'], name='Klaue rechts (außen)?')
-    fig.add_scatter(x=sheep.index, y=sheep['sum0_1'], name='Klaue rechts (innen)?')
-    fig.add_scatter(x=sheep.index, y=sheep['sum1_0'], name='Klaue links (außen)?')
-    fig.add_scatter(x=sheep.index, y=sheep['sum1_1'], name='Klaue links (innen)?')
-    fig.show()
     
 def clean(sheep):
     sheep['sum1'] = sheep['sum1']-(sheep['sum1_0'][0]+sheep['sum1_1'][0])
@@ -44,3 +36,26 @@ def clean(sheep):
     sheep['sum0_0'] = sheep['sum0_0']*6.4/9.81
     sheep['sum0_1'] = sheep['sum0_1']*6.4/9.81
     return sheep
+
+def show(sheep):
+    #fig = px.line()
+    fig = go.Figure()
+    fig.add_scatter(x=sheep.index, y=sheep['sum0'], name='Summe0 rechts')
+    fig.add_scatter(x=sheep.index, y=sheep['sum1'], name='Summe1 links')
+    fig.add_scatter(x=sheep.index, y=sheep['sum0_0'], name='rechts (außen)?')
+    fig.add_scatter(x=sheep.index, y=sheep['sum0_1'], name='rechts (innen)?')
+    fig.add_scatter(x=sheep.index, y=sheep['sum1_0'], name='links (außen)?')
+    fig.add_scatter(x=sheep.index, y=sheep['sum1_1'], name='links (innen)?')
+    
+    fig.update_layout(
+    title=("Belastung der Hinterläufe"),
+    xaxis_title="Zeit (ms)",
+    yaxis_title="Gewicht (kg)",
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="#7f7f7f"
+        )
+    )
+    
+    fig.show()
