@@ -22,12 +22,12 @@ def prepare(sheepnr):
     return s
     
 def clean(sheep):
-    sheep['sum1'] = sheep['sum1']-(sheep['sum1_0'][0]+sheep['sum1_1'][0])
-    sheep['sum0'] = sheep['sum0']-(sheep['sum0_0'][0]+sheep['sum0_1'][0])
     sheep['sum1_0'] = sheep['sum1_0']-(sheep['sum1_0'][0])
     sheep['sum1_1'] = sheep['sum1_1']-(sheep['sum1_1'][0])
     sheep['sum0_0'] = sheep['sum0_0']-(sheep['sum0_0'][0])
     sheep['sum0_1'] = sheep['sum0_1']-(sheep['sum0_1'][0])
+    sheep['sum1'] = sheep['sum1_0']+sheep['sum1_1']
+    sheep['sum0'] = sheep['sum0_0']+sheep['sum0_1']
     # cast to kg
     sheep['sum0'] = sheep['sum0']*6.4/9.81
     sheep['sum1'] = sheep['sum1']*6.4/9.81
