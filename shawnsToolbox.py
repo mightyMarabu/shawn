@@ -29,12 +29,12 @@ def clean(sheep):
     sheep['sum1'] = sheep['sum1_0']+sheep['sum1_1']
     sheep['sum0'] = sheep['sum0_0']+sheep['sum0_1']
     # cast to kg
-    sheep['sum0'] = sheep['sum0']*6.4/9.81
-    sheep['sum1'] = sheep['sum1']*6.4/9.81
-    sheep['sum1_0'] = sheep['sum1_0']*6.4/9.81
-    sheep['sum1_1'] = sheep['sum1_1']*6.4/9.81
-    sheep['sum0_0'] = sheep['sum0_0']*6.4/9.81
-    sheep['sum0_1'] = sheep['sum0_1']*6.4/9.81
+    sheep['sum1_0'] = sheep['sum1_0']*2.13/9.81
+    sheep['sum1_1'] = sheep['sum1_1']*2.13/9.81
+    sheep['sum0_0'] = sheep['sum0_0']*2.13/9.81
+    sheep['sum0_1'] = sheep['sum0_1']*2.13/9.81
+    sheep['sum0'] = sheep['sum0_0']+sheep['sum0_1']
+    sheep['sum1'] = sheep['sum1_0']+sheep['sum1_1']
     return sheep
 
 def show(sheep,sheepnr):
